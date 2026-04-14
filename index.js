@@ -10,7 +10,7 @@ app.use('/api/items', require('./routes/items'));
 // --- EL CAMBIO IMPORTANTE AQUÍ ---
 // process.env.PORT lee el puerto que le asigne Railway
 // Si no existe (como en tu PC), usa el 4001 por defecto
-const PORT = process.env.PORT || 4001; 
+const PORT = process.env.PORT || 6000; 
 
 app.listen(PORT, () => {
     console.log(`🚀 Servidor listo en el puerto ${PORT}`);
