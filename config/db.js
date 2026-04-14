@@ -1,21 +1,23 @@
 const mysql = require('mysql2');
+require('dotenv').config();
 
-// Sin dotenv, sin variables de entorno, directo al grano
 const pool = mysql.createPool({
-    host: '127.0.0.1', 
-    user: 'root',
-    password: '',
-    database: 'api_jwt_db',
-    port: 3306
+    // Railway rellena estas variables automáticamente si las configuras
+    host: process.env.MYSQLHOST || '127.0.0.1', 
+    user: process.env.MYSQLUSER || 'root',
+    password: process.env.MYSQLPASSWORD || '',
+    database: process.env.MYSQLDATABASE || 'api_jwt_db',
+    port: process.env.MYSQLPORT || 3306
 });
 
+// Verificación para la consola
 pool.getConnection((err, connection) => {
     if (err) {
-        console.error('❌ Error real:', err.message);
+        console.error('❌ Error de conexión:', err.message);
     } else {
-        console.log('✅ ¡CONECTADO A XAMPP!');
+        console.log('✅ Conexión exitosa a la base de datos');
         connection.release();
     }
 });
 
-module.exports = pool;
+module.exports = pool.promise();
