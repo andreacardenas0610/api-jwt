@@ -2,15 +2,16 @@ const mysql = require('mysql2');
 require('dotenv').config();
 
 const pool = mysql.createPool({
-    // Railway rellena estas variables automáticamente si las configuras
-    host: process.env.MYSQLHOST || '127.0.0.1', 
-    user: process.env.MYSQLUSER || 'root',
-    password: process.env.MYSQLPASSWORD || '',
-    database: process.env.MYSQLDATABASE || 'api_jwt_db',
-    port: process.env.MYSQLPORT || 3306
+    // Usamos los nombres exactos que tienes en tu captura de Railway
+    host: process.env.DB_HOST || '127.0.0.1', 
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || '',
+    database: process.env.DB_NAME || 'api_jwt_db',
+    port: process.env.DB_PORT || 3306,
+    waitForConnections: true,
+    connectionLimit: 10
 });
 
-// Verificación para la consola
 pool.getConnection((err, connection) => {
     if (err) {
         console.error('❌ Error de conexión:', err.message);
