@@ -1,20 +1,20 @@
 const mysql = require('mysql2');
-require('dotenv').config();
 
+// Forzamos los datos de tu PC directamente para probar
 const connection = mysql.createConnection({
-    host: 'localhost',
+    host: '127.0.0.1', 
     user: 'root',
     password: '',
-    database: 'api_jwt_db'
+    database: 'api_jwt_db',
+    port: 3306
 });
 
 connection.connect((err) => {
     if (err) {
-        console.error('Error conectando a MySQL:', err);
+        console.error('❌ Error real:', err.message);
         return;
     }
-    console.log('Conectado a MySQL en XAMPP');
+    console.log('✅ ¡POR FIN! Conectado localmente');
 });
 
-// ESTO ES LO MÁS IMPORTANTE:
 module.exports = connection;
